@@ -10,13 +10,32 @@ export default function PartnerPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
-        setTimeout(() => {
+
+        try {
+            const formData = new FormData(e.currentTarget);
+            const response = await fetch("https://formspree.io/f/xldqqqlw", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+            } else {
+                console.error("Form submission failed");
+                alert("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error submitting form", error);
+            alert("Something went wrong. Please check your connection.");
+        } finally {
             setIsSubmitting(false);
-            setSubmitted(true);
-        }, 1500);
+        }
     };
 
     return (
@@ -114,12 +133,13 @@ export default function PartnerPage() {
                                 <Button variant="outline" className="border-blue-200 text-blue-700 hover:bg-blue-100" onClick={() => setSubmitted(false)}>Submit Another Inquiry</Button>
                             </motion.div>
                         ) : (
-                            <form onSubmit={handleSubmit} className="space-y-6">
+                            <form action="https://formspree.io/f/xldqqqlw" method="POST" onSubmit={handleSubmit} className="space-y-6">
                                 <div className="space-y-2 group">
                                     <label htmlFor="companyName" className="block text-sm font-bold text-primary tracking-wide uppercase group-focus-within:text-secondary transition-colors">Company Name</label>
                                     <input
                                         required
                                         id="companyName"
+                                        name="company"
                                         type="text"
                                         className="w-full px-0 py-3 bg-transparent border-b-2 border-neutral-200 focus:border-secondary outline-none transition-all placeholder-transparent text-lg text-neutral-800"
                                     />
@@ -131,6 +151,7 @@ export default function PartnerPage() {
                                         <input
                                             required
                                             id="contactPerson"
+                                            name="name"
                                             type="text"
                                             className="w-full px-0 py-3 bg-transparent border-b-2 border-neutral-200 focus:border-secondary outline-none transition-all placeholder-transparent text-lg text-neutral-800"
                                         />
@@ -140,6 +161,7 @@ export default function PartnerPage() {
                                         <input
                                             required
                                             id="email"
+                                            name="email"
                                             type="email"
                                             className="w-full px-0 py-3 bg-transparent border-b-2 border-neutral-200 focus:border-secondary outline-none transition-all placeholder-transparent text-lg text-neutral-800"
                                         />
@@ -150,6 +172,7 @@ export default function PartnerPage() {
                                     <label htmlFor="partnershipType" className="block text-sm font-bold text-primary tracking-wide uppercase group-focus-within:text-secondary transition-colors">Partnership Type</label>
                                     <select
                                         id="partnershipType"
+                                        name="partnership_type"
                                         className="w-full px-0 py-3 bg-transparent border-b-2 border-neutral-200 focus:border-secondary outline-none transition-all text-lg text-neutral-800 cursor-pointer"
                                     >
                                         <option value="">Select Type...</option>
@@ -166,6 +189,7 @@ export default function PartnerPage() {
                                     <textarea
                                         required
                                         id="proposal"
+                                        name="proposal"
                                         rows={3}
                                         className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-secondary/20 focus:border-secondary outline-none transition-all resize-none mt-2"
                                     ></textarea>

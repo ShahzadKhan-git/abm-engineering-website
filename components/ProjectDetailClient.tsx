@@ -203,7 +203,8 @@ export default function ProjectDetailClient({ project, galleryImages, otherProje
                                     <Phone className="h-5 w-5 text-secondary mr-4" />
                                     <div>
                                         <span className="text-xs font-bold text-neutral-400 uppercase tracking-widest block">Direct Line</span>
-                                        <span className="text-lg font-bold text-primary">7004557002</span>
+                                        <span className="text-lg font-bold text-primary">7004557002 / 6386441089</span>
+
                                     </div>
                                 </div>
                                 <Link href="/contact" className="block">

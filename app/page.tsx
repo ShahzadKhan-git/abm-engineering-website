@@ -438,10 +438,32 @@ function ContactSplitSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => { setIsSubmitting(false); setSubmitted(true); }, 1500);
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      const response = await fetch("https://formspree.io/f/xldqqqlw", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        console.error("Form submission failed");
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+      alert("Something went wrong. Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -477,20 +499,20 @@ function ContactSplitSection() {
             <button onClick={() => setSubmitted(false)} className="mt-8 text-secondary underline">Send another</button>
           </motion.div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form action="https://formspree.io/f/xldqqqlw" method="POST" onSubmit={handleSubmit} className="space-y-8">
             <div className="space-y-2">
               <label className="text-secondary font-bold text-xs tracking-widest uppercase">Name</label>
-              <input required className="w-full bg-[#0a2342] border-none text-white p-4 focus:ring-1 focus:ring-secondary outline-none placeholder:text-neutral-600" placeholder="Your name" />
+              <input required name="name" className="w-full bg-[#0a2342] border-none text-white p-4 focus:ring-1 focus:ring-secondary outline-none placeholder:text-neutral-600" placeholder="Your name" />
             </div>
 
             <div className="space-y-2">
               <label className="text-secondary font-bold text-xs tracking-widest uppercase">Email</label>
-              <input required type="email" className="w-full bg-[#0a2342] border-none text-white p-4 focus:ring-1 focus:ring-secondary outline-none placeholder:text-neutral-600" placeholder="Your email" />
+              <input required name="email" type="email" className="w-full bg-[#0a2342] border-none text-white p-4 focus:ring-1 focus:ring-secondary outline-none placeholder:text-neutral-600" placeholder="Your email" />
             </div>
 
             <div className="space-y-2">
               <label className="text-secondary font-bold text-xs tracking-widest uppercase">Message</label>
-              <textarea required rows={4} className="w-full bg-[#0a2342] border-none text-white p-4 focus:ring-1 focus:ring-secondary outline-none placeholder:text-neutral-600 resize-none" placeholder="Your message" />
+              <textarea required name="message" rows={4} className="w-full bg-[#0a2342] border-none text-white p-4 focus:ring-1 focus:ring-secondary outline-none placeholder:text-neutral-600 resize-none" placeholder="Your message" />
             </div>
 
             <button type="submit" disabled={isSubmitting} className="w-full bg-white text-primary font-bold py-4 hover:bg-neutral-100 transition-colors uppercase tracking-widest mt-4">

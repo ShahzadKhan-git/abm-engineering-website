@@ -20,7 +20,7 @@ export const projects: Project[] = [
         slug: "piping-works-installation",
         title: "Piping Works, Installation, Testing & Commissioning",
         client: "BPCL – LOBP, Rasayni",
-        location: "Rasayni, India",
+        location: "Rasayni, Mumbai, India",
         description: "Executed comprehensive piping works including installation, testing, and commissioning of equipment along with associated mechanical works.",
         fullDescription: `
             Our team executed a turnkey piping solution for BPCL's LOBP facility at Rasayni. The scope involved the complete lifecycle of industrial piping—from fabrication and erection to hydro-testing and final commissioning.
@@ -51,7 +51,7 @@ export const projects: Project[] = [
         slug: "sprinkler-system-installation",
         title: "Sprinkler System & Associated Mechanical Works",
         client: "BPCL – LOBP, Rasayni",
-        location: "Rasayni, India",
+        location: "Rasayni, Mumbai, India",
         description: "Completed installation of fire sprinkler systems and associated mechanical works, ensuring compliance with industrial safety norms.",
         fullDescription: `
             Fire safety is paramount in petrochemical facilities. We installed a comprehensive fire sprinkler network covering critical storage and processing zones. 
@@ -82,7 +82,7 @@ export const projects: Project[] = [
         slug: "roofing-sheeting-structural",
         title: "Roofing Sheeting & Miscellaneous Structural Works",
         client: "BPCL – LOBP, Rasayni",
-        location: "Rasayni, India",
+        location: "Rasayni, Mumbai, India",
         description: "Delivered roofing sheeting solutions along with miscellaneous structural works, providing durable weather protection and structural integrity.",
         fullDescription: `
             We provided a complete structural envelope solution, involving the erection of heavy steel structures and the installation of industrial-grade roofing sheets.
@@ -113,7 +113,7 @@ export const projects: Project[] = [
         slug: "pulse-air-system",
         title: "Pulse Air System Installation",
         client: "BPCL – LOBP, Rasayni",
-        location: "Rasayni, India",
+        location: "Rasayni, Mumbai, India",
         description: "Successfully installed a pulse air system for finished product tanks, improving product handling efficiency and operational reliability.",
         fullDescription: `
             To optimize the mixing and storage of finished petroleum products, we installed an advanced Pulse Air System. This technology replaces mechanical mixers, using compressed air pulses to agitate liquids.
